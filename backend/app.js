@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -8,7 +9,16 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
   });
-   
+  
+  app.use(bodyParser.json());
+
+  app.post((req, res, next) => {
+   console.log(req.body);
+   res.status(201).json({
+       message: 'The thing has been created succesfully'
+   });
+  });
+
 app.use((req, res, next ) => {
     const stuff = [
         {
